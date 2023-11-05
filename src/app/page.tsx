@@ -8,11 +8,11 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   const lastGame =
-    (typeof window !== undefined &&
+    (typeof window !== "undefined" &&
       localStorage.getItem(LOCAL_STORAGE_KEYS.lastGame)) ||
     0;
   const bestGame =
-    (typeof window !== undefined &&
+    (typeof window !== "undefined" &&
       localStorage.getItem(LOCAL_STORAGE_KEYS.bestGame)) ||
     0;
 
