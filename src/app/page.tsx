@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <Container>
-      <h1 className="text-3xl font-bold">Quiz Letras</h1>
+      <h1 className="text-3xl font-bold">Quiz sobre crase</h1>
       <div className="flex gap-8 max-sm:flex-col sm:gap-6">
         <h4>Última partida: {lastGame} ponto(s)</h4>
         <h4>Melhor partida: {bestGame} ponto(s)</h4>
