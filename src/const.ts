@@ -1,4 +1,9 @@
-export const quizes = [
+export const LOCAL_STORAGE_KEYS = {
+  lastGame: "quiz-letras-last-game",
+  bestGame: "quiz-letras-best-game",
+};
+
+export const questions = [
   {
     question: "Alguma coisa?",
     answers: [

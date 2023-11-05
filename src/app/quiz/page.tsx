@@ -2,18 +2,17 @@
 
 import Button from "@/components/Button";
 import Container from "@/components/Container";
-import { quizes } from "@/const";
+import { LOCAL_STORAGE_KEYS, questions } from "@/const";
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export default function Quiz() {
   const [score, setScore] = useState(0);
   const [questionIndex, setQuestionIndex] = useState(0);
   const router = useRouter();
-  console.log({ score });
 
   const hasQuestion = useMemo(() => {
-    return questionIndex < quizes.length;
+    return questionIndex < questions.length;
   }, [questionIndex]);
 
   const checkAnswer = (isCorrect: boolean) => {
@@ -22,6 +21,18 @@ export default function Quiz() {
     }
     setQuestionIndex((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    if (!hasQuestion) {
+      localStorage.setItem(LOCAL_STORAGE_KEYS.lastGame, String(score));
+      const rawBestGame = localStorage.getItem(LOCAL_STORAGE_KEYS.bestGame);
+      const lastBestGame = rawBestGame ? Number(rawBestGame) : 0;
+      if (lastBestGame < score) {
+        localStorage.setItem(LOCAL_STORAGE_KEYS.bestGame, String(score));
+      }
+    }
+    // eslint-disable-next-line
+  }, [hasQuestion]);
 
   return (
     <Container>
@@ -35,10 +46,10 @@ export default function Quiz() {
         {hasQuestion ? (
           <>
             <h4>
-              Pergunta {questionIndex + 1}: {quizes[questionIndex].question}
+              Pergunta {questionIndex + 1}: {questions[questionIndex].question}
             </h4>
             <div className="grid grid-cols-2 gap-4 w-full max-sm:grid-cols-1">
-              {quizes[questionIndex].answers.map((answer, index) => {
+              {questions[questionIndex].answers.map((answer, index) => {
                 return (
                   <Button
                     key={`answer-${index}`}
