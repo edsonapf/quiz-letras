@@ -65,7 +65,7 @@ export default function Quiz() {
       <div className="flex flex-col items-center gap-4 w-full">
         {hasQuestion ? (
           <>
-            <h4>
+            <h4 className="font-medium text-2xl text-center">
               Pergunta {questionIndex + 1}: {question?.question}
             </h4>
             <div className="grid grid-cols-2 gap-4 w-full max-sm:grid-cols-1">
