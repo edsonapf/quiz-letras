@@ -25,9 +25,10 @@ export default function Quiz() {
   useEffect(() => {
     if (!hasQuestion) {
       localStorage.setItem(LOCAL_STORAGE_KEYS.lastGame, String(score));
-      const rawBestGame = localStorage.getItem(LOCAL_STORAGE_KEYS.bestGame);
-      const lastBestGame = rawBestGame ? Number(rawBestGame) : 0;
-      if (lastBestGame < score) {
+      const bestGame = Number(
+        localStorage.getItem(LOCAL_STORAGE_KEYS.bestGame) || "0"
+      );
+      if (bestGame < score) {
         localStorage.setItem(LOCAL_STORAGE_KEYS.bestGame, String(score));
       }
     }
